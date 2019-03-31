@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../style/base.css";
 
 import { If, Then, Else } from "./conditional.js";
 import GitIssue from "../components/git-issue.js";
@@ -18,113 +17,70 @@ class Rest extends Component {
       infoIssues: [],
       repos: [],
       repo: "",
-      issueEndPoint:`https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript`,
-      baseEndPoint: `https://api.github.com/search/repositories?q=topic:graphql`
+      issueEndPoint: `https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript`,
+      baseEndPoint: `https://api.github.com/search/repositories?q=topic:graphql`,
+      renderInfoIssues: false
     };
+    this.getIssueInfo();
   }
 
-  getIssues = async () => {
-    let URL = this.state.issueEndPoint;
-    let result = await superagent.get(URL);
-    console.log('data', result.body.items);
-    // let responseIssues = result.body.items.map(issue => repo.full_name);
-    this.setState({ justIssues: result.body.items });
-  };
-
-
-  getIssueInfo = async () => {
-    let URL = this.state.issueEndPoint;
-    let result = await superagent.get(URL);
-    console.log(result.body.items);
-    // let issueData = result.body.items.map(issue =>{
-    //   issue.newThing = "thing"
-    //   console.log('issue', issue)
-    //   this.getRepoInfo(issue);
-    //   return issue;
-    //   // this.getRepoInfo(issue)
-    //   // console.log('issue', issue)
-    // })
-    // let responseIssues = result.body.items.map(issue => repo.full_name);
-    this.setState({ infoIssues: result.body.items });
-    console.log('state', this.state)
-  };
-
-  getRepoInfo = (issue) =>{
-    // console.log('url', issue.repository_url);
-    let URL = issue.respository_url;
-    superagent.get(URL).then(data=>{
-      console.log(data);
-    })
-    // console.log('repoInfo', repoInfo);
-    // issue.repo_name = repoInfo.name;
-    // issue.watchers = repoInfo.watchers;
-    // issue.repo_description= repoInfo.description;
-    // issue.repo_url = repoInfo.git_url;
-    // return issue;
+  getIssueInfo = async()=>{
+    let allInfoIssues = [];
+    try{
+      let issues = await superagent.get(this.state.issueEndPoint).set(`Authorization`, `bearer ${process.env.REACT_APP_GIT}`);
+      let repos = issues.body.items.map(issue =>{
+        return issue.repository_url;
+      });
+      
+      let repoRequests = repos.map( (repo)=>{
+        return superagent.get(repo).set(`Authorization`, `bearer ${process.env.REACT_APP_GIT}`);
+      })
+      
+      let allRepos = await Promise.all(repoRequests);
+      console.log('assl repos', allRepos)
+      
+      allInfoIssues = issues.body.items;
+        for (let i = 0; i < allInfoIssues.length; i++) {
+            allInfoIssues[i].repo_name = allRepos[i].body.name;
+            allInfoIssues[i].watchers = allRepos[i].body.watchers;
+            allInfoIssues[i].repo_description = allRepos[i].body.description;
+            allInfoIssues[i].repo_url = allRepos[i].body.git_url;
+          }     
+          this.setState({ infoIssues: allInfoIssues});
+        }
+        catch(e){console.error('cannot make requests');}
   }
-
-  // getRepoData = async repo => {
-  //   console.log(repo);
-  //   this.setState({ repo }, async () => {
-  //     console.log("state", this.state);
-  //     const data = await superagent.get(
-  //       `https://api.github.com/search/repositories?q=repo:${this.state.repo}`
-  //     );
-  //     console.log("repos data", data);
-  //   });
-  // };
-
 
   render() {
     return (
       <section className="container">
-        <div style={{width: "350px"}}>            
-        <div > endpoint: {this.state.issueEndPoint}</div>
-          <button onClick={() => this.getIssues()}>GitHub Repos</button>
-          <If condition={this.state.justIssues}>
-            <Then>
-              <ul>             
-                {this.state.justIssues.map((issue, i) => (
-                  <li >
-                  <GitIssue 
-                  issue_url={issue.url}
-                  issueUpdate={issue.updated_at}
-                  issueBody={issue.body}
-                  issueTitle={issue.title}
-                  repo_url={issue.repository_url}/>
-              </li>
-                ))}
-              </ul>
-            </Then>
-          </If>
-        </div>
-
-        <div>            
-        <div style={{width: "350px"}}>            
-        <div> endpont: {this.state.baseEndPoint}</div>
-          <button onClick={() => this.getIssueInfo()}>GitHub Issues Info</button>
-          <If condition={this.state.infoIssues}>
-            <Then>
-              <ul>
-                {/* {this.state.infoIssues.map((issue, i) => (
-                  <li>
-                  <GitIssue 
-                  issue_url={issue.url}
-                  issueUpdate={issue.updated_at}
-                  issueBody={issue.body}
-                  issueTitle={issue.title}
-                  repo_url={issue.repository_url}/>
-                  </li>
-                ))} */}
-              </ul>
-            </Then>
-          </If>
-        </div>
+        <div>
+          <div>
+            <If condition={this.state.infoIssues}>
+              <Then>
+                <ul>
+                  {this.state.infoIssues.map((issue, i) => (
+                    <li>
+                      <GitIssue
+                        issue_url={issue.url}
+                        issueUpdate={issue.updated_at.split('T')[0]}
+                        issueBody={issue.body}
+                        issueTitle={issue.title}
+                        repo_url={issue.repository_url}
+                        repo_name={issue.repo_name}
+                        repo_description={issue.repo_description}
+                        watchers={issue.watchers}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </Then>
+            </If>
+          </div>
         </div>
       </section>
     );
   }
 }
-
 
 export default Rest;
