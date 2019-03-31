@@ -1,0 +1,169 @@
+@import "~bulma/sass/utilities/initial-variables"
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow')
+
+
+// Config vars
+// Kaldi logo brand color: #FD461E
+// $kaldi-red: rgb(2,2,2);
+// $green-invert: #fff
+
+$green: #68A225
+$green-invert: #DEE2E0
+$orange: #F17633
+
+$family-primary: 'PT Sans Narrow', sans-serif
+
+$primary: $green
+$primary-invert: $green-invert
+$warning: $orange
+$body-color: $green-invert
+$black: #2b2523
+$title-color: $white
+$info: darken($green-invert, 30%)
+$content-color: $white;
+$link: $blue
+
+// $card-header-background-color: $primary-invert
+
+
+// body
+//   background-color: $primary-invert
+//   height: -webkit-fill-auto
+
+
+.button 
+  width: 100%
+
+.card-header button
+  background-color: lighten($primary, 5%)
+
+.card-header button:hover
+  background-color: darken($primary, 5%)
+
+.card-content *
+  padding: 5px !important
+
+.navbar .navbar-menu
+  box-shadow:none !important
+
+
+.content .taglist
+  list-style: none
+  margin-bottom: 0
+  margin-left: 0
+  margin-right: 1.5rem
+  margin-top: 1.5rem
+  display: flex
+  flex-wrap: wrap
+  justify-content: left
+  align-items: center
+  li
+    padding: 0 2rem 1rem 0
+    margin-bottom: 1.5rem
+    margin-top: 0
+
+.content li + li
+  margin-top: 0em !important
+    
+
+// Helper Classes
+.full-width-image-container
+  width: 100vw
+  height: 400px
+  position: relative
+  left: 50%
+  right: 50%
+  margin: 2em -50vw
+  background-size: cover
+  background-position: bottom
+  display: flex
+  justify-content: center
+  align-items: center
+
+.full-width-image
+    width: 100vw
+    height: 400px
+    background-size: cover
+    background-position: bottom
+    display: flex
+    justify-content: center
+    align-items: center
+
+.btn
+    display: inline-block
+    padding: 12px 16px 10px
+    font-size: 18px
+    font-size: 1rem
+    line-height: 1.25
+    background-color: #fff
+    border-radius: .25rem
+    text-decoration: none
+    font-weight: 700
+    color: #CC3700
+    text-align: center
+    -webkit-box-shadow: inset 0 0 0 2px #CC3700
+    box-shadow: inset 0 0 0 2px #f40
+    -webkit-transition: all .15s ease
+    transition: all .15s ease
+
+.margin-top-0
+  margin-top: 0 !important
+
+.navbar-item .icon
+  color: $primary
+// Override for use of svg's from https://simpleicons.org/
+
+// [aria-current] 
+//   font-weight: bold
+//   background-color: $warning
+  
+.icon svg
+  width: 1.5rem
+  height: 1.5rem
+  fill: currentColor
+.navbar-brand .navbar-item.logo
+  padding: 0 1rem
+footer.footer
+  padding: 3rem 0rem 0rem
+  background-color: transparent
+
+//Menu overrides
+$menu-item-color: $white-ter
+// $menu-item-hover-color: $black !important
+$menu-item-hover-background-color: $warning
+$menu-item-active-color: $green-invert
+$menu-item-active-background-color:	$green-invert
+$menu-list-border-left: 1px solid $green-invert
+$menu-label-color: $white-ter
+
+
+.menu-label
+  font-size: 1em !important
+  text-align: left
+  color: $black !important
+
+
+.menu-list
+  list-style: none !important
+  text-align: left
+
+.menu-list a
+    color: $black !important
+.social
+  padding: 2em
+.social a
+    padding: .5em .5em .3em .5em
+    border-radius: 1em
+    background-color: $white-ter
+    margin: .5em
+    width: 1em
+    height: 1em
+    vertical-align: middle
+    display: inline
+
+.thumbs-wrapper
+  display: none
+
+
+@import "~bulma"
+
