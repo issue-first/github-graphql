@@ -9,7 +9,7 @@ const GitIssue = props => {
       <div className="card" style={{ marginTop: "20px" }}>
         <div
           className="card-header is-centered is-3"
-          style={{ justifyContent: "center", padding: "15px" }}
+          style={{ padding: "15px" }}
         >
           <button
             href={props.issue_url}

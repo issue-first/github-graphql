@@ -80,7 +80,7 @@ class App extends Component {
           <div className="columns" style={{ padding: "2em" }}>
             {/* <div className="container is-centered"> */}
             <div className="column is-half">
-              <Graphql number={100} lang="python" />
+              <Graphql number={20} lang="python" />
             </div>
             {/* </div> */}
 
