@@ -13,13 +13,10 @@ class Rest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      justIssues: [],
       infoIssues: [],
       repos: [],
       repo: "",
       issueEndPoint: `https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript`,
-      baseEndPoint: `https://api.github.com/search/repositories?q=topic:graphql`,
-      renderInfoIssues: false
     };
     this.getIssueInfo();
   }
