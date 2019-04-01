@@ -78,13 +78,10 @@ class App extends Component {
         </section>
         <ApolloProvider client={client}>
           <div className="columns" style={{ padding: "2em" }}>
-            {/* <div className="container is-centered"> */}
             <div className="column is-half">
               <Graphql number={20} lang="python" />
             </div>
-            {/* </div> */}
 
-            {/* <div className="container is-centered"> */}
             <div className="column is-half">
               <div
                 class="button is-info is-large"
@@ -94,12 +91,11 @@ class App extends Component {
               </div>
               <If condition={this.state.showRest}>
                 <Then>
-                  <Rest />
+                  <Rest number={20}/>
                 </Then>
               </If>
             </div>
           </div>
-          {/* </div> */}
         </ApolloProvider>
       </>
     );
