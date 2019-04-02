@@ -10,10 +10,9 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import Graphql from "./components/graphql.js";
 import Rest from "./components/rest.js";
 import "dotenv";
-import { If, Then } from "./components/conditional.js";
+import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
 
-console.log(process.env.REACT_APP_GIT);
 const GITHUB_BASE_URL = "https://api.github.com/graphql";
 
 const httpLink = new HttpLink({
@@ -51,13 +50,22 @@ class App extends Component {
     super(props);
     this.state = {
       showRest: false,
-      showGraphql: false
+      language: "",
+      label: "",
+      queryString: "is:open is:public"
     };
   }
 
-  toggleGraphql = () => {
-    let bool = this.state.showGraphql;
-    this.setState({ showGraphql: !bool });
+  languageSelected = e => {
+    e.preventDefault();
+    console.log(e.target.value);
+    this.setState({ language: " language:" + e.target.value });
+  };
+
+  issueSelected = e => {
+    e.preventDefault();
+    console.log(e.target.value);
+    this.setState({ label: " label:" + e.target.value });
   };
 
   toggleRest = () => {
@@ -72,32 +80,72 @@ class App extends Component {
           <div class="hero-body">
             <div class="container">
               <h1 class="title is-1">Issue First</h1>
-              <h2 class="subtitle is-3">Find JavaScript GitHub Issues Tagged 'Good-First-Issue'</h2>
+              <h2 class="subtitle is-3">
+                Find JavaScript GitHub Issues Tagged 'Good-First-Issue'
+              </h2>
               {/* <h2 class="subtitle is-3">Langauge: 'JavaScript'</h2> */}
-
             </div>
           </div>
         </section>
-        <ApolloProvider client={client}>
-          <div className="columns" style={{ padding: "2em" }}>
-            <div className="column is-half">
-              <Graphql number={20} lang="python" />
-            </div>
 
-            <div className="column is-half">
-              <div
-                class="button is-info is-large"
-                onClick={() => this.toggleRest()}
-              >
-                Query With GitHub ReST API
-              </div>
-              <If condition={this.state.showRest}>
-                <Then>
-                  <Rest number={20}/>
-                </Then>
-              </If>
-            </div>
+        <h3> Please Select Lanugage and Issue Type</h3>
+
+        <div class="field">
+          <div class="select">
+            <select onChange={e => this.languageSelected(e)}>
+              <option>Language</option>
+              <option>javascript</option>
+              <option>python</option>
+            </select>
           </div>
+
+          <div class="select">
+            <select onChange={e => this.issueSelected(e)}>
+              <option>Issue Type</option>
+              <option>good-first-issue</option>
+              <option>a-bug</option>
+            </select>
+          </div>
+        </div>
+
+        <ApolloProvider client={client}>
+          <If condition={this.state.language && this.state.label}>
+            <Then>
+              <div className="columns" style={{ padding: "2em" }}>
+                <div className="column is-half">
+                  <Graphql
+                    number={20}
+                    query={
+                      this.state.queryString +
+                      this.state.language +
+                      this.state.label
+                    }
+                    lang="python"
+                  />
+                </div>
+
+                <div className="column is-half">
+                  <div
+                    class="button is-info is-large"
+                    onClick={() => this.toggleRest()}
+                  >
+                    Query With GitHub ReST API
+                  </div>
+                  <If condition={this.state.showRest}>
+                    <Then>
+                      <Rest
+                        number={20}
+                        open={this.state.queryString.split(" ")[0]}
+                        public={this.state.queryString.split(" ")[1]}
+                        language={this.state.language.trim()}
+                        label={this.state.label.trim()}
+                      />
+                    </Then>
+                  </If>
+                </div>
+              </div>
+            </Then>
+          </If>
         </ApolloProvider>
       </>
     );
