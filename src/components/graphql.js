@@ -7,9 +7,9 @@ import { If, Then, Else } from "./conditional.js";
 import "../index.sass";
 
 const ISSUES = gql`
-  query($resultsNum: Int) {
+  query($resultsNum: Int, $queryString: String!) {
     search(
-      query: "label:good-first-issue is:open is:public language:javascript"
+      query: $queryString
       type: ISSUE
       first: $resultsNum
     ) {
@@ -51,7 +51,6 @@ class Issues extends Component {
     }
 
     this.setState(() => ({ issues, renderResults: !this.state.renderResutls }));
-    console.log("state", this.state);
   };
 
   toggleGraphQL = () => {
@@ -60,6 +59,7 @@ class Issues extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <>
         <ApolloConsumer>
@@ -69,7 +69,9 @@ class Issues extends Component {
               onClick={async () => {
                 const { data, error, errors } = await client.query({
                   query: ISSUES,
-                  variables: { resultsNum: this.props.number }
+                  variables: { 
+                    resultsNum: this.props.number,
+                    queryString: this.props.query}
                 });
                 this.onIssueFetched(data.search.edges, error, errors);
                 client.clearStore();

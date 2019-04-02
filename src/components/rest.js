@@ -16,7 +16,7 @@ class Rest extends Component {
       infoIssues: [],
       repos: [],
       repo: "",
-      issueEndPoint: `https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript&per_page=${this.props.number}`,
+      issueEndPoint: `https://api.github.com/search/issues?q=${this.props.language}+${this.props.open}+${this.props.public}+${this.props.label}&per_page=${this.props.number}`,
     };
     this.getIssueInfo();
   }
@@ -34,7 +34,6 @@ class Rest extends Component {
       })
       
       let allRepos = await Promise.all(repoRequests);
-      console.log('assl repos', allRepos)
       
       allInfoIssues = issues.body.items;
         for (let i = 0; i < allInfoIssues.length; i++) {
