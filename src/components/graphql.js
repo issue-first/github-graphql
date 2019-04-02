@@ -64,19 +64,19 @@ class Issues extends Component {
       <>
         <ApolloConsumer>
           {client => (
-              <div
-                className="button is-primary is-large is-info"
-                onClick={async () => {
-                  const { data, error, errors } = await client.query({
-                    query: ISSUES,
-                    variables: { resultsNum: this.props.number }
-                  });
-                  this.onIssueFetched(data.search.edges, error, errors);
-                  client.clearStore();
-                }}
-              >
-                Graphql
-              </div>
+            <div
+              className="button is-primary is-large is-info"
+              onClick={async () => {
+                const { data, error, errors } = await client.query({
+                  query: ISSUES,
+                  variables: { resultsNum: this.props.number }
+                });
+                this.onIssueFetched(data.search.edges, error, errors);
+                client.clearStore();
+              }}
+            >
+              Query With GitHub GraphQL API
+            </div>
           )}
         </ApolloConsumer>
 

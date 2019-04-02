@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../style/base.css"
 
 const GitIssue = props => {
   console.log("props", props);
