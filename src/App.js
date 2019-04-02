@@ -71,35 +71,33 @@ class App extends Component {
         <section class="hero has-text-centered is-primary">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title is-1">Issue First Query</h1>
-              <h2 class="subtitle is-3">GraphQL & Rest</h2>
+              <h1 class="title is-1">Issue First</h1>
+              <h2 class="subtitle is-3">Find JavaScript GitHub Issues Tagged 'Good-First-Issue'</h2>
+              {/* <h2 class="subtitle is-3">Langauge: 'JavaScript'</h2> */}
+
             </div>
           </div>
         </section>
         <ApolloProvider client={client}>
           <div className="columns" style={{ padding: "2em" }}>
-            {/* <div className="container is-centered"> */}
             <div className="column is-half">
               <Graphql number={20} lang="python" />
             </div>
-            {/* </div> */}
 
-            {/* <div className="container is-centered"> */}
             <div className="column is-half">
               <div
                 class="button is-info is-large"
                 onClick={() => this.toggleRest()}
               >
-                Rest
+                Query With GitHub ReST API
               </div>
               <If condition={this.state.showRest}>
                 <Then>
-                  <Rest />
+                  <Rest number={20}/>
                 </Then>
               </If>
             </div>
           </div>
-          {/* </div> */}
         </ApolloProvider>
       </>
     );

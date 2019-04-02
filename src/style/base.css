@@ -1,51 +1,6 @@
-@import './reset.css';
-@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow');
+/* @import './reset.css'; */
+/* @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow'); */
 
-
-
-/* #root > * {
-    font-family: 'PT Sans Narrow', sans-serif;
+.card-content{
+    font-size: 20px;
 }
-
-section.container{
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
-    justify-items: center;
-}
-
-section.container > div{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-items: center;
-    margin: 2em;
-}
-
-button {
-    font-size: 2.1em;
-    background-color: rgb(21, 29, 136);
-    color: rgb(210, 218, 223);
-    border: none;
-}
-
-
-h3{
-    font-size: 1.2em;
-    padding: .2em;
-}
-
-section.container div{
-    font-size: 1.1em;
-}
-
-ul li{
-    background-color: rgb(210, 218, 223);
-    color: rgb(5,5,5);
-    margin: .5em;
-    padding: .5em;
-}
-
-ul li:hover{
-    background-color: rgb(176, 192, 202);
-} */

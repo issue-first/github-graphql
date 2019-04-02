@@ -16,7 +16,7 @@ class Rest extends Component {
       infoIssues: [],
       repos: [],
       repo: "",
-      issueEndPoint: `https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript`,
+      issueEndPoint: `https://api.github.com/search/issues?q=label:good-first-issue+is:public+is:open+language:javascript&per_page=${this.props.number}`,
     };
     this.getIssueInfo();
   }
@@ -50,8 +50,6 @@ class Rest extends Component {
 
   render() {
     return (
-      <section className="container">
-        <div>
           <div>
             <If condition={this.state.infoIssues}>
               <Then>
@@ -74,8 +72,6 @@ class Rest extends Component {
               </Then>
             </If>
           </div>
-        </div>
-      </section>
     );
   }
 }
