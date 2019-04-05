@@ -13,6 +13,7 @@ import Header from "./components/header.js";
 import "dotenv";
 import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
+import "./style/base.css"
 
 const GITHUB_BASE_URL = "https://api.github.com/graphql";
 
@@ -79,29 +80,34 @@ class App extends Component {
       <>
         <Header />
 
-        <div class="container has-text-centered">
-          <h3 class="title is-primary is-4" style={{ paddingTop: "1em" }}>
+        <div class="container has-text-centered" style={{marginBottom: '1em'}}>
+          <h3 class="title is-primary is-3" style={{ paddingTop: "1em" }}>
             {" "}
             Please Select Lanugage and Issue Type
           </h3>
           <div class="field">
             <div class="select" style={{ paddingRight: "10px" }}>
-              <select onChange={e => this.languageSelected(e)}>
+              <select style={{fontSize: "26px"}} onChange={e => this.languageSelected(e)}>
                 <option>Language</option>
-                <option>javascript</option>
-                <option>python</option>
+                <option>JavaScript</option>
+                <option>Python</option>
+                <option>Java</option>
+                <option>.Net</option>
               </select>
             </div>
 
             <div class="select">
-              <select onChange={e => this.issueSelected(e)}>
+              <select style={{fontSize: "26px"}} onChange={e => this.issueSelected(e)}>
                 <option>Label</option>
                 <option>good-first-issue</option>
+                <option>help-wanted</option>
                 <option>a-bug</option>
               </select>
             </div>
           </div>
         </div>
+
+        <hr class="has-background-primary" style={{ height: "4px", width:"90%", margin: "4em auto 1em auto"}}></hr>
 
         <ApolloProvider client={client}>
           <If condition={this.state.language && this.state.label}>
