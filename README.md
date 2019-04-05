@@ -42,12 +42,10 @@ Tools:
 
 
 ### Resources Utilized:
-[Road to build react](https://github.com/the-road-to-graphql/react-graphql-github-apollo/blob/master/src/index.js)
+* [Road to build react](https://github.com/the-road-to-graphql/react-graphql-github-apollo/blob/master/src/index.js)
 * essential to wiring github graphql API with auth in App
-[Bulma](https://bulma.io/documentation/elements/content/)
-* Styling!
-[Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999)
-* helped query type repository
+*Layout : [Bulma](https://bulma.io/documentation/elements/content/)
+* [Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999) - helped clarlify how to query type repository with `...on issue`
 
 
 
