@@ -85,9 +85,9 @@ class App extends Component {
             {" "}
             Please Select Lanugage and Issue Type
           </h3>
-          <div class="field">
-            <div class="select" style={{ paddingRight: "10px" }}>
-              <select style={{fontSize: "26px"}} onChange={e => this.languageSelected(e)}>
+          <div class="field" >
+            <div class="select" style={{ marginBottom: "1em" }}>
+              <select onChange={e => this.languageSelected(e)}>
                 <option>Language</option>
                 <option>JavaScript</option>
                 <option>Python</option>
@@ -96,8 +96,8 @@ class App extends Component {
               </select>
             </div>
 
-            <div class="select">
-              <select style={{fontSize: "26px"}} onChange={e => this.issueSelected(e)}>
+            <div class="select" >
+              <select onChange={e => this.issueSelected(e)}>
                 <option>Label</option>
                 <option>good-first-issue</option>
                 <option>help-wanted</option>
@@ -107,7 +107,7 @@ class App extends Component {
           </div>
         </div>
 
-        <hr class="has-background-primary" style={{ height: "4px", width:"90%", margin: "4em auto 1em auto"}}></hr>
+        <hr class="has-background-primary" style={{ height: "4px", width:"90%", margin: "1em auto 1em auto"}}></hr>
 
         <ApolloProvider client={client}>
           <If condition={this.state.language && this.state.label}>
