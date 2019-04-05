@@ -1,25 +1,24 @@
 @import "~bulma/sass/utilities/initial-variables"
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow')
 
-
+  
 // Config vars
 // Kaldi logo brand color: #FD461E
 // $kaldi-red: rgb(2,2,2);
-// $green-invert: #fff
+// $appGreen: #fff
 
-$green-invert: #68A225
-$green: #DEE2E0
+$appGreen: #68A225
+$green-invert: #DEE2E0
 $orange: #F17633
 
 $family-primary: 'PT Sans Narrow', sans-serif
-
-$primary: $green
-$primary-invert: darken($green-invert, 20%)
+$primary: $green-invert
+$primary-invert: darken($appGreen, 20%)
 $warning: $orange
-$body-color: $green-invert
+$body-color: $appGreen
 $black: #2b2523
-$title-color: $white
-$info: darken($green-invert, 30%)
+$title-color: darken($green-invert, 60%)
+$info: darken($appGreen, 30%)
 $content-color: $white;
 $link: $blue
 
@@ -46,6 +45,8 @@ $link: $blue
 .navbar .navbar-menu
   box-shadow:none !important
 
+select 
+  width: 10em
 
 .content .taglist
   list-style: none
@@ -131,9 +132,9 @@ footer.footer
 $menu-item-color: $white-ter
 // $menu-item-hover-color: $black !important
 $menu-item-hover-background-color: $warning
-$menu-item-active-color: $green-invert
-$menu-item-active-background-color:	$green-invert
-$menu-list-border-left: 1px solid $green-invert
+$menu-item-active-color: $appGreen
+$menu-item-active-background-color:	$appGreen
+$menu-list-border-left: 1px solid $appGreen
 $menu-label-color: $white-ter
 
 
