@@ -9,6 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 import Graphql from "./components/graphql.js";
 import Rest from "./components/rest.js";
+import Header from "./components/header.js";
 import "dotenv";
 import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
@@ -76,35 +77,29 @@ class App extends Component {
   render() {
     return (
       <>
-        <section class="hero has-text-centered is-primary">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title is-1">Issue First</h1>
-              <h2 class="subtitle is-3">
-                Find JavaScript GitHub Issues Tagged 'Good-First-Issue'
-              </h2>
-              {/* <h2 class="subtitle is-3">Langauge: 'JavaScript'</h2> */}
+        <Header />
+
+        <div class="container has-text-centered">
+          <h3 class="title is-primary is-4" style={{ paddingTop: "1em" }}>
+            {" "}
+            Please Select Lanugage and Issue Type
+          </h3>
+          <div class="field">
+            <div class="select" style={{ paddingRight: "10px" }}>
+              <select onChange={e => this.languageSelected(e)}>
+                <option>Language</option>
+                <option>javascript</option>
+                <option>python</option>
+              </select>
             </div>
-          </div>
-        </section>
 
-        <h3> Please Select Lanugage and Issue Type</h3>
-
-        <div class="field">
-          <div class="select">
-            <select onChange={e => this.languageSelected(e)}>
-              <option>Language</option>
-              <option>javascript</option>
-              <option>python</option>
-            </select>
-          </div>
-
-          <div class="select">
-            <select onChange={e => this.issueSelected(e)}>
-              <option>Issue Type</option>
-              <option>good-first-issue</option>
-              <option>a-bug</option>
-            </select>
+            <div class="select">
+              <select onChange={e => this.issueSelected(e)}>
+                <option>Label</option>
+                <option>good-first-issue</option>
+                <option>a-bug</option>
+              </select>
+            </div>
           </div>
         </div>
 
