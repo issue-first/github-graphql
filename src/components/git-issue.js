@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "../style/base.css"
 
 const GitIssue = props => {
-  console.log("props", props);
+
   return (
     <>
       <div className="card" style={{ marginTop: "20px" }}>
@@ -34,7 +34,7 @@ const GitIssue = props => {
           </div>
           <div>
             <hr />
-            <a class="content" href={props.repo_url}>
+            <a className="content" href={props.repo_url}>
               {" "}
               <strong>Repo:</strong>
               {props.repo_name}

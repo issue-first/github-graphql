@@ -80,13 +80,13 @@ class App extends Component {
       <>
         <Header />
 
-        <div class="container has-text-centered" style={{marginBottom: '1em'}}>
-          <h3 class="title is-primary is-3" style={{ paddingTop: "1em" }}>
+        <div className="container has-text-centered" style={{marginBottom: '1em'}}>
+          <h3 className="title is-primary is-3" style={{ paddingTop: "1em" }}>
             {" "}
             Please Select Lanugage and Issue Type
           </h3>
-          <div class="field" >
-            <div class="select" style={{ marginBottom: "1em" }}>
+          <div className="field" >
+            <div className="select" style={{ marginBottom: "1em" }}>
               <select onChange={e => this.languageSelected(e)}>
                 <option>Language</option>
                 <option>JavaScript</option>
@@ -96,7 +96,7 @@ class App extends Component {
               </select>
             </div>
 
-            <div class="select" >
+            <div className="select" >
               <select onChange={e => this.issueSelected(e)}>
                 <option>Label</option>
                 <option>good-first-issue</option>
