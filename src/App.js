@@ -130,7 +130,7 @@ class App extends Component {
                     class="button is-info is-large"
                     onClick={() => this.toggleRest()}
                   >
-                    Query With GitHub ReST API
+                    Query With GitHub REST API
                   </div>
                   <If condition={this.state.showRest}>
                     <Then>
