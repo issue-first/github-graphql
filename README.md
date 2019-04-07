@@ -15,9 +15,11 @@
   * compare network data for each type of query
 
 ## Setting up the App
- * `npm i`
- * Enter your github token in .env
- `REACT_APP_GIT=gittokenxxx`
+* clone the repository
+* cd into `github-graphql`
+* `npm i`
+* Enter your github token in .env
+ `REACT_APP_GIT=github-token-here`
 
 
 ## Starting the App
