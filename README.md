@@ -1,6 +1,9 @@
 
-# Issue First Query
-## Find `good-first-issues` in github using GraphQL and ReST API
+# Issue First
+## Find `good-first-issues`, `help-wanted` and `a-bug` issues in github using Github GraphQL and REST API
+
+[![Build Status](https://www.travis-ci.com/hingham/github-graphql.svg?branch=master)](https://www.travis-ci.com/hingham/github-graphql)
+
 ##### [Demo](https://issue-first-github-queries.netlify.com)
 ### Use
 * Search for github queries by the issue tags
