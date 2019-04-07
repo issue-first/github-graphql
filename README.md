@@ -1,6 +1,6 @@
 
 # Issue First
-## Find `good-first-issues`, `help-wanted` and `a-bug` issues in github using Github GraphQL and REST API
+### Search for `good-first-issues`, `help-wanted` and `a-bug` issues using Github's GraphQL and REST APIs.
 
 [![Build Status](https://www.travis-ci.com/hingham/github-graphql.svg?branch=master)](https://www.travis-ci.com/hingham/github-graphql)
 
