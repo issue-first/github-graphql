@@ -5,12 +5,13 @@
 [![Build Status](https://www.travis-ci.com/hingham/github-graphql.svg?branch=master)](https://www.travis-ci.com/hingham/github-graphql)
 
 ##### [Demo](https://issue-first-github-queries.netlify.com)
-### Use
+
+### Using the App
 * Search for github queries by the issue tags
 * Find `good-first-issues` tagged in open source projects
 
-### Learn
-* Search with GitHub API v4 GraphQL, or v3 ReST
+### Using the App to Compare GraphQL vs REST
+* Search with GitHub API v4 GraphQL, or v3 REST
   * compare how queries are formatted
   * compare network data for each type of query
 
@@ -18,7 +19,7 @@
 * clone the repository
 * cd into `github-graphql`
 * `npm i`
-* Enter your github token in .env
+* Add your github token in .env
  `REACT_APP_GIT=github-token-here`
 
 
@@ -29,7 +30,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open http://localhost:3000 to view it in the browser.
 
 ### `npm test`
 
@@ -44,14 +45,18 @@ See react documentation about [deployment](https://facebook.github.io/create-rea
 Deployment info has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
 Tools:
-
-
 ### Resources Utilized:
 * [Road to build react](https://github.com/the-road-to-graphql/react-graphql-github-apollo/blob/master/src/index.js)
 * essential to wiring github graphql API with auth in App
 *Layout : [Bulma](https://bulma.io/documentation/elements/content/)
 * [Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999) - helped clarlify how to query type repository with `...on issue`
 
-
+#### Tests:
+* Assertions made:
+  * Query was called on click
+  * Query called was correct query
+* Assertions that need to be made:
+  * REST endpoint data renders
+  * The correct number of cards were rendered
 
 
