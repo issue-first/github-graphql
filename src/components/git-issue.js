@@ -4,11 +4,11 @@ import "../style/base.css"
 
 const GitIssue = props => {
 
+  console.log('data', props);
   return (
-    <>
       <div className="card" style={{ marginTop: "20px" }}>
         <div className="card-header is-3" style={{ padding: "15px" }}>
-          <a
+          <a className="issue-title"
             href={props.issue_url}
             style={{
               padding: "6px",
@@ -48,7 +48,7 @@ const GitIssue = props => {
           </div>
         </div>
       </div>
-    </>
+
   );
 };
 

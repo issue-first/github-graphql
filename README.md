@@ -46,6 +46,7 @@ Tools:
 * essential to wiring github graphql API with auth in App
 *Layout : [Bulma](https://bulma.io/documentation/elements/content/)
 * [Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999) - helped clarlify how to query type repository with `...on issue`
+* [graphql-server-mock](https://www.robinwieruch.de/graphql-server-mock-apollo-client/)
 
 
 

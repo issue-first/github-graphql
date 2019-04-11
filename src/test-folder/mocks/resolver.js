@@ -8,7 +8,7 @@ export const resolvers = {
             body:
               "Mostrar una notificación emergente cuando se reciba un mensaje. Así como el número de mensajes junto a la imagen de perfil",
             updatedAt: "2019-04-06T22:13:08Z",
-            title: "Notificaciones emergentes",
+            title: "Title",
             url: "https://github.com/Arquisoft/dechat_es2b/issues/90",
             repository: {
               description: "Dechat ES2B",
