@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"
 
 import { If, Then, Else } from "./conditional.js";
 import GitIssue from "../components/git-issue.js";
@@ -16,7 +17,7 @@ class Rest extends Component {
       infoIssues: [],
       repos: [],
       repo: "",
-      issueEndPoint: `https://api.github.com/search/issues?q=${this.props.language}+${this.props.open}+${this.props.public}+${this.props.label}&per_page=${this.props.number}`,
+      issueEndPoint: `https://api.github.com/search/issues?q=${this.props.language}+${this.props.open}+${this.props.public}+${this.props.label}&per_page=${this.props.number}&page=${this.props.page}`,
     };
     this.getIssueInfo();
   }
@@ -48,6 +49,8 @@ class Rest extends Component {
   }
 
   render() {
+    console.log('props', this.props.page)
+    console.log('state', this.state.issueEndPoint)
     return (
           <div>
             <If condition={this.state.infoIssues}>
@@ -75,4 +78,10 @@ class Rest extends Component {
   }
 }
 
-export default Rest;
+const mapStateToProps = state => ({
+  page: state.data.page
+});
+
+export default connect(
+  mapStateToProps)(Rest);
+

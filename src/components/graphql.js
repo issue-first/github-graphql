@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from 'react-redux'
+import * as actions from '../components/redux/actions.js'
+
 import { Query, graphql, withApollo, ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 import GitIssue from "../components/git-issue.js";
@@ -14,6 +16,12 @@ const ISSUES = gql`
       first: $resultsNum
     ) {
       issueCount
+      pageInfo{
+        hasNextPage
+        hasPreviousPage
+        endCursor
+        startCursor
+      }
       edges {
         node {
           ... on Issue {
@@ -50,13 +58,15 @@ class Issues extends Component {
       console.log("ERROR:", error ? error : errors);
     }
 
-    this.setState(() => ({ issues, renderResults: !this.state.renderResutls }));
+    this.setState(() => ({ issues: issues.edges, renderResults: !this.state.renderResutls }));
+    console.log('page data', issues.pageInfo);
+    this.props.getCursor(issues.pageInfo);
   };
 
-  toggleGraphQL = () => {
-    let bool = this.state.graphqlToggle;
-    this.setState({ graphqlToggle: !bool });
-  };
+  // toggleGraphQL = () => {
+  //   let bool = this.state.graphqlToggle;
+  //   this.setState({ graphqlToggle: !bool });
+  // };
 
   render() {
     console.log(this.props);
@@ -73,7 +83,9 @@ class Issues extends Component {
                     resultsNum: this.props.number,
                     queryString: this.props.query}
                 });
-                this.onIssueFetched(data.search.edges, error, errors);
+                // this.onIssueFetched(data.search.edges, error, errors);
+                this.onIssueFetched(data.search, error, errors);
+
                 client.clearStore();
               }}
             >
@@ -110,5 +122,16 @@ class Issues extends Component {
   }
 }
 
-export default Issues;
-// export default Issues;
+const mapStateToProps = state =>({
+  data: state.data
+})
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  getCursor: cursors => dispatch(actions.resetCursor(cursors))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Issues);
+

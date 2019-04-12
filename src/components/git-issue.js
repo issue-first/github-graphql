@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import "../style/base.css"
 
 const GitIssue = props => {
-  console.log("props", props);
   return (
     <>
       <div className="card" style={{ marginTop: "20px" }}>

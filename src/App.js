@@ -10,6 +10,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import Graphql from "./components/graphql.js";
 import Rest from "./components/rest.js";
 import Header from "./components/header.js";
+import Pagination from "./components/pagination.js"
 import "dotenv";
 import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
@@ -103,7 +104,10 @@ class App extends Component {
           </div>
         </div>
 
+
         <ApolloProvider client={client}>
+        <Pagination/>
+
           <If condition={this.state.language && this.state.label}>
             <Then>
               <div className="columns" style={{ padding: "2em" }}>
