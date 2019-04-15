@@ -1,9 +1,14 @@
 let initialState = {
+  currentStart: "Y3Vyc29yOjE=",
+  currentEnd: null,
+  prevStart: [],
+  language: null,
+  status: "open",
+  access: "public",
+  label: null,
+  perPage: 20,
   page: 1,
-  startCursor: null,
-  endCursor: null,
-  nextStart: null,
-  prevStart: null
+  pageCount: 0
 };
 
 export default (state = initialState, action) => {
@@ -11,22 +16,40 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case "NEXT_PAGE":
-      let nextPage = (state.page += 1);
-      let newState = { ...state, page: nextPage };
+      let newState = state.page === state.pageCount ? 
+      {...state} :
+      { ...state, page: state.page+=1, prevStart: [...state.prevStart, state.currentStart], currentStart: state.currentEnd };
+
       console.log("next state", newState);
       return newState;
 
     case "PREV_PAGE":
-      // console.log('next state', state);
-
-      let prevPage = state.page === 1 ? 1 : (state.page -= 1);
-      newState = { ...state, page: prevPage };
+      newState =  state.page === 1 ? {...state} :  { ...state, page: state.page-=1, nextStart: state.currentStart, currentStart: state.prevStart.pop() };
       console.log("minus state", newState);
       return newState;
 
+    case "LANG":
+      newState = { ...state, language: payload };
+      return newState;
+
+    case "LABEL":
+      newState = { ...state, label: payload };
+      return newState;
+
     case "RESET_CURSOR":
-        console.log(payload);
-      return state;
+      let { hasNextPage, hasPreviousPage, startCursor, endCursor } = payload;
+      newState = {
+        ...state,
+        currentEnd: endCursor,
+      };
+      return newState;
+
+      case "ISSUE_TOTAL":
+      newState = {
+          ...state, 
+          pageCount: Math.ceil(payload/20)
+      }
+      return newState;
 
     default:
       return state;

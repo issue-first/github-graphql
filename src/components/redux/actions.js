@@ -18,3 +18,24 @@ export const resetCursor = pageData =>{
         payload: pageData
     }
 }
+
+export const getIssueCount = count =>{
+    return{
+        type: "ISSUE_TOTAL",
+        payload: count
+    }
+}
+
+export const getLanguage = item =>{
+    return {
+        type: "LANG",
+        payload: item
+    }
+}
+
+export const getLabel = item =>{
+    return {
+        type: "LABEL",
+        payload: item
+    }
+}

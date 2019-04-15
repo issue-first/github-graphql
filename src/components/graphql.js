@@ -14,6 +14,7 @@ const ISSUES = gql`
       query: $queryString
       type: ISSUE
       first: $resultsNum
+      after: null
     ) {
       issueCount
       pageInfo{
@@ -61,15 +62,11 @@ class Issues extends Component {
     this.setState(() => ({ issues: issues.edges, renderResults: !this.state.renderResutls }));
     console.log('page data', issues.pageInfo);
     this.props.getCursor(issues.pageInfo);
+    this.props.getTotal(issues.issueCount);
   };
 
-  // toggleGraphQL = () => {
-  //   let bool = this.state.graphqlToggle;
-  //   this.setState({ graphqlToggle: !bool });
-  // };
-
   render() {
-    console.log(this.props);
+    console.log('button graphql');
     return (
       <>
         <ApolloConsumer>
@@ -89,7 +86,7 @@ class Issues extends Component {
                 client.clearStore();
               }}
             >
-              Query With GitHub GraphQL API
+              Query With Github GraphQL API
             </div>
           )}
         </ApolloConsumer>
@@ -101,7 +98,6 @@ class Issues extends Component {
                 return (
                   <li key={`ql` + i}>
                     <GitIssue
-                      // issue_url={node}
                       issueBody={edge.node.body}
                       issueTitle={edge.node.title}
                       issueUpdate={edge.node.updatedAt.split("T")[0]}
@@ -127,7 +123,8 @@ const mapStateToProps = state =>({
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  getCursor: cursors => dispatch(actions.resetCursor(cursors))
+  getCursor: cursors => dispatch(actions.resetCursor(cursors)),
+  getTotal: total => dispatch(actions.getIssueCount(total))
 })
 
 export default connect(

@@ -3,43 +3,54 @@ import { connect } from "react-redux";
 import * as actions from "./redux/actions.js";
 
 class Pagination extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      issueCount: null
+    };
+  }
   getNextPage = () => {
     this.props.nextPage();
   };
   getPrevPage = () => {
     this.props.prevPage();
   };
+
   render() {
     return (
-      <nav
-        style={{ width: "200px" }}
-        class="pagination"
-        role="navigation"
-        aria-label="pagination"
-      >
-        <div
-          onClick={() => {
-            this.getPrevPage();
-          }}
-          class="button pagination-previous"
+      <div class="container" style={{marginTop: "2em"}}>
+        <nav
+          style={{ margin:"auto", width: "200px"}}
+          class="pagination"
+          role="navigation"
+          aria-label="pagination"
         >
-          Previous
-        </div>
-        <div
-          onClick={() => {
-            this.getNextPage();
-          }}
-          class="button pagination-next"
-        >
-          Next page
-        </div>
-      </nav>
+          <div
+            onClick={() => {
+              this.getPrevPage();
+            }}
+            class="button pagination-previous has-background-primary"
+          >
+            Previous
+          </div>
+
+          <div
+            onClick={() => {
+              this.getNextPage();
+            }}
+            class="button pagination-next has-background-primary"
+          >
+            Next
+          </div>
+        </nav>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  page: state.data.page
+  page: state.data.page,
+  issueCount: state.data.issueCount
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
@@ -10,7 +11,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import Graphql from "./components/graphql.js";
 import Rest from "./components/rest.js";
 import Header from "./components/header.js";
-import Pagination from "./components/pagination.js"
+import Pagination from "./components/pagination.js";
+import StaticGraphQL from "./components/static-graphql.js"
+
+import Form from "./components/form.js";
 import "dotenv";
 import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
@@ -58,69 +62,46 @@ class App extends Component {
     };
   }
 
-  languageSelected = e => {
-    e.preventDefault();
-    console.log(e.target.value);
-    this.setState({ language: " language:" + e.target.value });
-  };
-
-  issueSelected = e => {
-    e.preventDefault();
-    console.log(e.target.value);
-    this.setState({ label: " label:" + e.target.value });
-  };
-
   toggleRest = () => {
     let bool = this.state.showRest;
-    this.setState({ showRest: !bool });
+    this.setState({ showRest: true });
   };
 
   render() {
     return (
       <>
-        <Header />
-
-        <div class="container has-text-centered">
-          <h3 class="title is-primary is-4" style={{ paddingTop: "1em" }}>
-            {" "}
-            Please Select Lanugage and Issue Type
-          </h3>
-          <div class="field">
-            <div class="select" style={{ paddingRight: "10px" }}>
-              <select onChange={e => this.languageSelected(e)}>
-                <option>Language</option>
-                <option>javascript</option>
-                <option>python</option>
-              </select>
-            </div>
-
-            <div class="select">
-              <select onChange={e => this.issueSelected(e)}>
-                <option>Label</option>
-                <option>good-first-issue</option>
-                <option>a-bug</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-
         <ApolloProvider client={client}>
-        <Pagination/>
+          <Header />
+          <Form />
 
-          <If condition={this.state.language && this.state.label}>
+          <If condition={this.props.pageCount>0}>
+          <Then>
+          <Pagination/>
+
+          </Then>
+          </If>
+
+          <If condition={this.props.language && this.props.label}>
             <Then>
               <div className="columns" style={{ padding: "2em" }}>
                 <div className="column is-half">
+                <If condition={this.props.page===1}>
+                  <Then>
                   <Graphql
                     number={20}
                     query={
-                      this.state.queryString +
-                      this.state.language +
-                      this.state.label
+                      `${this.state.queryString} language:${this.props.language} label:${this.props.label}`
                     }
-                    lang="python"
-                  />
+                    />
+                  </Then>
+                  <Else>
+                    <StaticGraphQL
+                    number={20}
+                    query={
+                      `${this.state.queryString} language:${this.props.language} label:${this.props.label}`
+                    }/>
+                  </Else>
+                </If>
                 </div>
 
                 <div className="column is-half">
@@ -128,17 +109,11 @@ class App extends Component {
                     class="button is-info is-large"
                     onClick={() => this.toggleRest()}
                   >
-                    Query With GitHub ReST API
+                    Query With Github REST API
                   </div>
                   <If condition={this.state.showRest}>
                     <Then>
-                      <Rest
-                        number={20}
-                        open={this.state.queryString.split(" ")[0]}
-                        public={this.state.queryString.split(" ")[1]}
-                        language={this.state.language.trim()}
-                        label={this.state.label.trim()}
-                      />
+                      <Rest/>
                     </Then>
                   </If>
                 </div>
@@ -151,4 +126,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  page: state.data.page,
+  language: state.data.language,
+  label: state.data.label,
+  currentStart: state.data.currentStart,
+  pageCount: state.data.pageCount,
+});
+
+export default connect(mapStateToProps)(App);
+
+// export default App;
