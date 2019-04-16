@@ -8,7 +8,7 @@ import GitIssue from "../components/git-issue.js";
 import { If, Then, Else } from "./conditional.js";
 import "../index.sass";
 
-const ISSUES = gql`
+export const ISSUES = gql`
   query($resultsNum: Int, $queryString: String!) {
     search(
       query: $queryString
@@ -16,6 +16,7 @@ const ISSUES = gql`
       first: $resultsNum
       after: null
     ) {
+
       issueCount
       pageInfo{
         hasNextPage
@@ -45,7 +46,7 @@ const ISSUES = gql`
   }
 `;
 
-class Issues extends Component {
+class IssueClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,12 +75,14 @@ class Issues extends Component {
           {client => (
             <div
               className="button is-primary is-large is-info"
+              id="gql-button"
               onClick={async () => {
                 const { data, error, errors } = await client.query({
                   query: ISSUES,
-                  variables: { 
+                  variables: {
                     resultsNum: this.props.number,
-                    queryString: this.props.query}
+                    queryString: this.props.query
+                  }
                 });
                 // this.onIssueFetched(data.search.edges, error, errors);
                 console.log('data from query ', data, error, errors)
@@ -133,4 +136,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Issues);
+
 

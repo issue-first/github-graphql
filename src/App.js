@@ -21,6 +21,7 @@ import Form from "./components/form.js";
 import "dotenv";
 import { If, Then, Else } from "./components/conditional.js";
 import "./index.sass";
+import "./style/base.css"
 
 const GITHUB_BASE_URL = "https://api.github.com/graphql";
 
@@ -120,6 +121,7 @@ class App extends Component {
                     onClick={() => this.toggleRest()}
                   >
                     Query With Github REST API
+
                   </div>
                   <If condition={this.props.showRest}>
                     <Then>

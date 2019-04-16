@@ -33,7 +33,7 @@ const GitIssue = props => {
           </div>
           <div>
             <hr />
-            <a class="content" href={props.repo_url}>
+            <a className="content" href={props.repo_url}>
               {" "}
               <strong>Repo:</strong>
               {props.repo_name}
