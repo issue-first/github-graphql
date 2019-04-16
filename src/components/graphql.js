@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from 'react-redux'
+import * as actions from '../components/redux/actions.js'
+
 import { Query, graphql, withApollo, ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 import GitIssue from "../components/git-issue.js";
@@ -8,11 +10,23 @@ import "../index.sass";
 
 export const ISSUES = gql`
   query($resultsNum: Int, $queryString: String!) {
-    search(query: $queryString, type: ISSUE, first: $resultsNum) {
+    search(
+      query: $queryString
+      type: ISSUE
+      first: $resultsNum
+      after: null
+    ) {
+
       issueCount
+      pageInfo{
+        hasNextPage
+        hasPreviousPage
+        endCursor
+        startCursor
+      }
       edges {
         node {
-          ... on Issue {
+          __typename ...on Issue {
             body
             updatedAt
             title
@@ -43,19 +57,18 @@ class IssueClass extends Component {
 
   onIssueFetched = (issues, error, errors) => {
     if (error || errors) {
-      console.log("ERROR:", error ? error : errors);
+      console.log("ERROR: ", error ? error : errors);
     }
-
-    this.setState(() => ({ issues, renderResults: !this.state.renderResutls }));
-  };
-
-  toggleGraphQL = () => {
-    let bool = this.state.graphqlToggle;
-    this.setState({ graphqlToggle: !bool });
+    
+    this.setState(() => ({ issues: issues.edges, renderResults: !this.state.renderResutls }));
+    console.log('page data', issues.pageInfo);
+    this.props.getCursor(issues.pageInfo);
+    this.props.getTotal(issues.issueCount);
   };
 
   render() {
-    console.log(this.props);
+    console.log('button graphql');
+    console.log('query string ', this.props.query)
     return (
       <>
         <ApolloConsumer>
@@ -71,11 +84,14 @@ class IssueClass extends Component {
                     queryString: this.props.query
                   }
                 });
-                this.onIssueFetched(data.search.edges, error, errors);
+                // this.onIssueFetched(data.search.edges, error, errors);
+                console.log('data from query ', data, error, errors)
+                this.onIssueFetched(data.search, error, errors);
+
                 client.clearStore();
               }}
             >
-              Query With GitHub GraphQL API
+              Query With Github GraphQL API
             </div>
           )}
         </ApolloConsumer>
@@ -87,7 +103,6 @@ class IssueClass extends Component {
                 return (
                   <li key={`ql` + i}>
                     <GitIssue
-                      // issue_url={node}
                       issueBody={edge.node.body}
                       issueTitle={edge.node.title}
                       issueUpdate={edge.node.updatedAt.split("T")[0]}
@@ -108,4 +123,18 @@ class IssueClass extends Component {
   }
 }
 
-export default IssueClass;
+const mapStateToProps = state =>({
+  data: state.data
+})
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  getCursor: cursors => dispatch(actions.resetCursor(cursors)),
+  getTotal: total => dispatch(actions.getIssueCount(total))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Issues);
+
+

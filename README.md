@@ -46,6 +46,11 @@ Deployment info has moved here: https://facebook.github.io/create-react-app/docs
 
 ### Resources Utilized:
 * [Road to build react](https://github.com/the-road-to-graphql/react-graphql-github-apollo/blob/master/src/index.js)
+* essential to wiring github graphql API with auth in App
+*Layout : [Bulma](https://bulma.io/documentation/elements/content/)
+* [Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999) - helped clarlify how to query type repository with `...on issue`
+* [working with fragments on unions and interfaes](https://www.apollographql.com/docs/react/advanced/fragments#fragment-matcher)
+
 * [Bulma](https://bulma.io/documentation/elements/content/) Layout and UI
 * [Stack Overflow](https://stackoverflow.com/questions/48244950/can-i-list-githubs-public-repositories-using-graphql/48245999#48245999) - example of how to query type `...on issue` for SearchItemResults that returns a union of mutltiple issues
 

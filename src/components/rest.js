@@ -1,11 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"
 
 import { If, Then, Else } from "./conditional.js";
 import GitIssue from "../components/git-issue.js";
-//this URL gives you all the good first issues for react language
-//doesn't give you a lot of data on the repo itself
-//we would probably want some details about what it is to know if we are interested in the project
-//https://api.github.com/search/issues?q=windows+label:good-first-issue+language:react
 import superagent from "superagent";
 let GitToken = process.env.GITHUB_API_TOKEN;
 
@@ -16,15 +13,16 @@ class Rest extends Component {
       infoIssues: [],
       repos: [],
       repo: "",
-      issueEndPoint: `https://api.github.com/search/issues?q=${this.props.language}+${this.props.open}+${this.props.public}+${this.props.label}&per_page=${this.props.number}`,
+      pageNumber: null,
     };
-    this.getIssueInfo();
   }
 
-  getIssueInfo = async()=>{
+  getIssueInfo = async(language, label, pageNum)=>{
+    console.log('getting all new issues');
+    let URL = `https://api.github.com/search/issues?q=+is:open+is:public+language:${language}+label:${label}&per_page=20&page=${pageNum}`
     let allInfoIssues = [];
     try{
-      let issues = await superagent.get(this.state.issueEndPoint).set(`Authorization`, `bearer ${process.env.REACT_APP_GIT}`);
+      let issues = await superagent.get(URL).set(`Authorization`, `bearer ${process.env.REACT_APP_GIT}`);
       let repos = issues.body.items.map(issue =>{
         return issue.repository_url;
       });
@@ -42,12 +40,16 @@ class Rest extends Component {
             allInfoIssues[i].repo_description = allRepos[i].body.description;
             allInfoIssues[i].repo_url = allRepos[i].body.git_url;
           }     
-          this.setState({ infoIssues: allInfoIssues});
+          this.setState({ infoIssues: allInfoIssues, pageNumber: this.props.pageNum});
         }
         catch(e){console.error('cannot make requests');}
   }
 
   render() {
+    if(!this.state.pageNumber || (this.props.pageNum !== this.state.pageNumber)){
+      this.getIssueInfo(this.props.language, this.props.label, this.props.pageNum);
+    }
+    console.log('global state via the app page: ', this.props.pageNum)
     return (
           <div>
             <If condition={this.state.infoIssues}>
@@ -55,7 +57,7 @@ class Rest extends Component {
                 <ul>
                   {this.state.infoIssues.map((issue, i) => (
                     <li>
-                      <GitIssue
+                      <GitIssue key={`rest-issue-${i}`}
                         issue_url={issue.url}
                         issueUpdate={issue.updated_at.split('T')[0]}
                         issueBody={issue.body}
@@ -75,4 +77,12 @@ class Rest extends Component {
   }
 }
 
-export default Rest;
+const mapStateToProps = state => ({
+  pageNum: state.data.page,
+  language: state.data.language,
+  label: state.data.label,
+});
+
+export default connect(
+  mapStateToProps)(Rest);
+
