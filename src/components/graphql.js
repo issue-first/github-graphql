@@ -25,7 +25,7 @@ const ISSUES = gql`
       }
       edges {
         node {
-          ... on Issue {
+          __typename ...on Issue {
             body
             updatedAt
             title
@@ -56,9 +56,9 @@ class Issues extends Component {
 
   onIssueFetched = (issues, error, errors) => {
     if (error || errors) {
-      console.log("ERROR:", error ? error : errors);
+      console.log("ERROR: ", error ? error : errors);
     }
-
+    
     this.setState(() => ({ issues: issues.edges, renderResults: !this.state.renderResutls }));
     console.log('page data', issues.pageInfo);
     this.props.getCursor(issues.pageInfo);
@@ -67,6 +67,7 @@ class Issues extends Component {
 
   render() {
     console.log('button graphql');
+    console.log('query string ', this.props.query)
     return (
       <>
         <ApolloConsumer>
@@ -81,6 +82,7 @@ class Issues extends Component {
                     queryString: this.props.query}
                 });
                 // this.onIssueFetched(data.search.edges, error, errors);
+                console.log('data from query ', data, error, errors)
                 this.onIssueFetched(data.search, error, errors);
 
                 client.clearStore();

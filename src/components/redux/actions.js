@@ -12,10 +12,22 @@ export const prevPage = backCursor =>{
     }
 };
 
+export const newSearch = () =>{
+    return {
+        type: "NEW_SEARCH"
+    }
+}
+
 export const resetCursor = pageData =>{
     return{
         type: "RESET_CURSOR",
         payload: pageData
+    }
+}
+
+export const toggleRest = ()=>{
+    return{
+        type: "SHOW_REST"
     }
 }
 

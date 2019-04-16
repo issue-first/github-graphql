@@ -20,7 +20,7 @@ class Pagination extends Component {
     return (
       <div class="container" style={{marginTop: "2em"}}>
         <nav
-          style={{ margin:"auto", width: "200px"}}
+          style={{ margin:"auto", width: "300px"}}
           class="pagination"
           role="navigation"
           aria-label="pagination"
@@ -31,7 +31,7 @@ class Pagination extends Component {
             }}
             class="button pagination-previous has-background-primary"
           >
-            Previous
+            Previous Page 
           </div>
 
           <div
@@ -40,7 +40,7 @@ class Pagination extends Component {
             }}
             class="button pagination-next has-background-primary"
           >
-            Next
+             Next Page
           </div>
         </nav>
       </div>
