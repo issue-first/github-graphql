@@ -46,7 +46,7 @@ export const ISSUES = gql`
   }
 `;
 
-class IssueClass extends Component {
+export class IssueClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -135,6 +135,7 @@ const mapDispatchToProps = (dispatch, getState) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Issues);
+)(IssueClass);
+
 
 
