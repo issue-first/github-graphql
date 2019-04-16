@@ -47,11 +47,11 @@ class Form extends Component {
 
         </div>
           <div
-            className="button is-normal is-info" 
+            className="button is-large is-primary" 
             onClick={() => {
               this.newSearch();
             }}
-            style={{ width:"300px" }}
+            style={{ width:"400px" }}
           >
             Find Issues
           </div>
