@@ -1,4 +1,3 @@
-
 # Issue First
 #### Search for issues labeled `good-first-issues`, `help-wanted` and `a-bug` using Github's GraphQL and REST APIs.
 
@@ -6,14 +5,17 @@
 
 ##### [Visit Issue First](https://issue-first-github-queries.netlify.com)
 
-### Using the App
-* Search for github queries by the issue tags
-* Find `good-first-issues` tagged in open source projects
+### Using the App to Find Open Issues
+* Search for github queries by the issue tags.
+* Easily find `good-first-issues`, `help-wanted`, and `a-bug` issues tagged in open source projects.
 
 ### Using the App to Compare GraphQL vs REST
 * Search with GitHub API v4 GraphQL, or v3 REST
   * compare how queries are formatted
-  * compare network data for each type of query
+  * compare pagination techniques for both API reponses
+* View the network tab
+  * See the response from github vs graphQL
+  * Compare amount of time and data transfered
 
 ## Setting up the App
 * clone the repository

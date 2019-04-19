@@ -7,10 +7,10 @@ let initialState = {
   access: "public",
   label: null,
   perPage: 20,
-  page: 1,
+  page: null,
   newSearch: false,
   showRest: false,
-  pageCount: 0
+  pageCount: null
 };
 
 export default (state = initialState, action) => {

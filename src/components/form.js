@@ -40,6 +40,7 @@ class Form extends Component {
           <div class="select">
             <select onChange={e => this.issueSelected(e)}>
               <option>Label</option>
+              <option>help-wanted</option>
               <option>good-first-issue</option>
               <option>a-bug</option>
             </select>
