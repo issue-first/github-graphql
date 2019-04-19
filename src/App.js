@@ -17,6 +17,7 @@ import Rest from "./components/rest.js";
 import Header from "./components/header.js";
 import Pagination from "./components/pagination.js";
 import StaticGraphQL from "./components/static-graphql.js";
+import Footer from "./components/footer.js"
 // import introspectionQueryResultData from './gql-json.json';
 
 import Form from "./components/form.js";
@@ -78,6 +79,7 @@ class App extends Component {
     return (
       <>
         <ApolloProvider client={client}>
+        <section className="main">
           <Header />
           <Form />
 
@@ -126,7 +128,9 @@ class App extends Component {
               </div>
             </Then>
           </If>
+        </section>
         </ApolloProvider>
+        <Footer/>
       </>
     );
   }

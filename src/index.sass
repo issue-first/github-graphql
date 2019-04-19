@@ -1,11 +1,6 @@
 @import "~bulma/sass/utilities/initial-variables"
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow')
 
-  
-// Config vars
-// Kaldi logo brand color: #FD461E
-// $kaldi-red: rgb(2,2,2);
-// $appGreen: #fff
 
 $appGreen: #68A225
 $green-invert: #DEE2E0
@@ -15,20 +10,19 @@ $family-primary: 'PT Sans Narrow', sans-serif
 $primary: $green-invert
 $primary-invert: darken($appGreen, 20%)
 $warning: $orange
-$body-color: $appGreen
 $black: #2b2523
 $title-color: darken($green-invert, 60%)
 $info: darken($appGreen, 30%)
 $content-color: $white;
 $link: $blue
 
-// $card-header-background-color: $primary-invert
+#root
+  display: flex
+  flex-direction: column
+  min-height: 100vh
 
-
-// body
-//   background-color: $primary-invert
-//   height: -webkit-fill-auto
-
+.main
+  flex: 1
 
 .button 
   width: 100%

@@ -24,13 +24,13 @@ class Pagination extends Component {
           class="pagination"
           role="navigation"
           aria-label="pagination"
-        >
+          >
           <div
             onClick={() => {
               this.getPrevPage();
             }}
-            class="button pagination-previous has-background-primary"
-          >
+            class="button pagination-previous has-background-primary is-size-4"
+            >
             Previous Page 
           </div>
 
@@ -38,11 +38,14 @@ class Pagination extends Component {
             onClick={() => {
               this.getNextPage();
             }}
-            class="button pagination-next has-background-primary"
-          >
+            class="button pagination-next has-background-primary is-size-4"
+            >
              Next Page
           </div>
         </nav>
+        <div className="container is-primary has-text-centered is-size-4">
+          <div classname="has-background-primary">Results: {((this.props.page - 1) * 20)+1} - {this.props.page*20} of {this.props.issueCount} </div>
+        </div>
       </div>
     );
   }
