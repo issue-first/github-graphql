@@ -10,6 +10,7 @@ let initialState = {
   page: null,
   newSearch: false,
   showRest: false,
+  issueCount: 0,
   pageCount: null
 };
 
@@ -72,6 +73,7 @@ export default (state = initialState, action) => {
     case "ISSUE_TOTAL":
       newState = {
         ...state,
+        issueCount: payload,
         pageCount: Math.ceil(payload / 20)
       };
       return newState;
