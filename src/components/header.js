@@ -1,4 +1,5 @@
 import React from "react";
+import github from "../images/github.svg"
 
 export default function header() {
   return (
@@ -10,6 +11,11 @@ export default function header() {
             Search Github Issues & Contribute to Open Source!
           </h2>
         </div>
+        <a target="_blank" href="https://github.com/hingham/github-graphql">
+
+        <img style={{height: "50px", width: "50px"}} src={github}/>
+
+        </a>
       </div>
     </section>
   );
