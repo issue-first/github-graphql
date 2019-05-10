@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import { If, Then, Else } from "./conditional.js";
 import GitIssue from "../components/git-issue.js";
 import superagent from "superagent";
-let GitToken = process.env.GITHUB_API_TOKEN;
 
 class Rest extends Component {
   constructor(props) {
