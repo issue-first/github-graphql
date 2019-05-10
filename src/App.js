@@ -34,7 +34,7 @@ const httpLink = new HttpLink({
     Authorization: `Bearer ${process.env.REACT_APP_GIT}`
   }
 });
-
+console.log(process.env.REACT_APP_GIT)
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
@@ -126,6 +126,11 @@ class App extends Component {
                   </If>
                 </div>
               </div>
+            </Then>
+          </If>
+          <If condition={this.props.pageCount && this.props.newSearch}>
+            <Then>
+              <Pagination />
             </Then>
           </If>
         </section>
