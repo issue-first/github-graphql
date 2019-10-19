@@ -24,7 +24,7 @@ class Form extends Component {
       <div class="container has-text-centered">
         <h3 class="title is-primary is-4" style={{ paddingTop: "1em" }}>
           {" "}
-          Please Select Lanugage and Issue Type
+          Please Select Language and Issue Type
         </h3>
         <div class="field">
           <div class="select" style={{ paddingRight: "10px" }}>
