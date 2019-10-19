@@ -8,6 +8,7 @@ const GitIssue = props => {
       <div className="card" style={{ marginTop: "20px" }}>
         <div className="card-header is-3" style={{ padding: "15px" }}>
           <a
+            target={props.issue_url}
             href={props.issue_url}
             style={{
               padding: "6px",
